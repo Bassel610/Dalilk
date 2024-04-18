@@ -1,0 +1,131 @@
+.Header{
+    width: 100%;
+}
+.Header .CoverNavBar{
+    width: 100%;
+    height: 180px;
+    background-color: #648B7F;
+    position: relative;
+    top: 0;
+}
+.Header .CoverNavBar .Logo{
+    width: 150px;
+    height: 150px;
+    float: left;
+}
+.Header .CoverNavBar .Logo img{
+    width: 100%;
+    height: 100%;
+    margin: 10px 10px 0 20px;
+}
+.Header .CoverNavBar .Search{
+    position: absolute;
+    right: 46px;
+    top: 15%;
+}
+
+.Header .CoverNavBar .Search input{
+    width: 280px;
+    height: 50px;
+    margin: 20px 0px 20px 20px;
+    border: transparent;
+    border-radius: 5px;
+    outline: none;
+}
+
+.Header .CoverNavBar .Search div{
+    background-color: #557c6bfa;
+    display: inline-block;
+    width: 150px;
+    height: 56px;
+    position: relative;
+    top: -5px;
+    cursor: pointer;
+}
+.Header .CoverNavBar .Search div span{
+    font-size: 26px;
+    font-weight: 600;
+    color: white;
+    position: relative;
+    top: 5px;
+    left: 50px;
+}
+.CatList{
+    width: 77%;
+    height: 44%;
+    position: absolute;
+    top: 100px;
+    right: 0;
+}
+.CatListDis{
+    width: 77%;
+    height: 44%;
+    position: absolute;
+    top: 113px;
+    right: 0;
+    display: none;
+}
+.CatList ul,
+.CatListDis ul{
+    display: flex;
+    position: absolute;
+    right: 0;
+}
+.CatList ul li,
+.CatListDis ul li {
+    list-style: none;
+    margin: 0 17px 0 0;
+    font-size: 20px;
+    font-weight: 400;
+    color: white;
+    cursor: pointer;
+    padding: 10px;
+}
+.CatList ul li:hover, 
+.CatListDis ul li:hover {
+    color: #244c3f;
+    border-bottom:2px solid #244c3f ;
+}
+@media only screen and (max-width: 900px) {
+    .CatList {
+        display: none;
+    }
+    .CatListDis {
+        display: block;
+    }
+    .Header .CoverNavBar .Search{
+        top: 25%;
+    }
+}
+@media only screen and (max-width: 690px) {
+    .Header .CoverNavBar .Search input{
+        width: 170px;
+    }
+    .SortSection .Contaner label{
+        font-size: 15px !important;
+    }
+    .SortSection .Contaner .SortBox .RemoveAllSort{
+        padding: 13px !important;
+        font-size: 14px !important;
+    }
+}
+@media only screen and (max-width: 830px) {
+    .CoverPage .FullPage .CoverContent .ImgCoverContent{
+        top: 156px;
+    }
+    .CoverPage .FullPage .CoverContent .ImgCoverContent .BigIcon{
+        width: 208px !important;
+    }
+    .CoverPage .FullPage .CoverContent .TextCoverContent{
+        top: 135px !important;
+    }
+    .CoverPage .FullPage .CoverContent .TextCoverContent div{
+        font-size: 124px !important;
+    }
+    .CoverPage .FullPage .CoverContent .ScoTextCoverContent{
+        top: 354px !important;
+    }
+    .CoverPage .FullPage .CoverContent .ScoTextCoverContent div:nth-child(1){
+        font-size: 82px !important; 
+    }
+}

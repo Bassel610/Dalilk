@@ -1,0 +1,58 @@
+    .Cards {
+        display: flex;
+        justify-content: center;
+        width: 100%;
+        align-items: center;
+    }
+
+    .Cards .Contaner {
+        display: flex;
+        flex-wrap: wrap;
+        max-width: 1200px;
+        margin: 20px;
+        width: 63%;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        border-radius: 8px;
+    }
+
+    .Cards .Contaner .Card {
+    border: 2px solid var(--main-color);
+    border-radius: 8px;
+    padding: 20px;
+    margin: 10px;
+    width: 80vw; 
+    box-shadow: 0 6px 10px rgba(0, 0, 0, 0.1);
+    direction: rtl; 
+    }
+
+    .Cards .Contaner .Card .Title {
+    font-size: 26px;
+    font-weight: bold;
+    color: var(--bold-color);
+    }
+
+    .Cards .Contaner .Card .Adress,
+    .Cards .Contaner .Card .LandMark,
+    .Cards .Contaner .Card .Type,
+    .Cards .Contaner .Card .Rate,
+    .Cards .Contaner .Card .Location {
+    margin-top: 10px;
+    font-size: 14px;
+    direction: rtl; 
+    }
+    .Cards .Contaner .Card  .ScoTitle{
+        color: var(--sco-color);
+        font-size: 18px;
+}
+    .Cards .Contaner .Card .Catigory {
+    background-color: var(--sco-color);
+    color: #fff;
+    font-weight: 500;
+    padding: 4px 8px;
+    margin-left: 8px; 
+    margin-right: 4px;
+    margin-bottom: 6px;
+    border-radius: 4px;
+    display: inline-block;
+    direction: rtl; 
+    }

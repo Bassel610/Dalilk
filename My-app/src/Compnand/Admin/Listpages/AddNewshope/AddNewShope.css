@@ -1,0 +1,136 @@
+.AddNewShope {
+    background-color: #fff;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    padding: 20px;
+    margin-bottom: 20px;
+  }
+  .AddNewShope form{
+    position: relative;
+  }
+  .AddNewShope h1 {
+    margin-bottom: 20px;
+    color: #333;
+  }
+  
+  .AddNewShope form {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
+  }
+  
+  .AddNewShope label {
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .AddNewShope span {
+    margin-bottom: 5px;
+    color: #666;
+  }
+  
+  .AddNewShope input {
+    padding: 8px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    width: 100%;
+  }
+  
+  .AddNewShope button {
+    padding: 8px 16px;
+    background-color: var(--sco-color);
+    color: #fff;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+  }
+  .AddNewShope button[type="submit"] {
+    padding: 8px 16px;
+    background-color: var(--sco-color);
+    color: #fff;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    width: 50%;
+    height: 41px;
+    font-size: 23px;
+    font-weight: 600;
+    position: absolute;
+    bottom: 0;
+    right: 0;
+  }
+  .AddNewShope .SendBtn{
+    padding: 8px 16px;
+    background-color: var(--sco-color);
+    color: #fff;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    width: 30%;
+    margin: 4px auto 4px auto;
+  }
+  
+  .AddNewShope button:hover {
+    background-color: var(--bold-color);
+  }
+
+  .AddNewShope .Category{
+    display: flex;
+  }
+  .AddNewShope .Address{
+    display: flex;
+  }
+
+  .AddNewShope .CatigoryRemoveBtn{
+    padding: 8px 16px;
+    background-color: var(--sco-color);
+    color: #fff;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    width: 17%;
+    margin: 4px auto 4px 4px;
+    text-align: center;
+    font-size: 16px;
+    font-weight: 700;
+  }
+  .AddNewShope .CatigorBtn{
+    padding: 8px 16px;
+    background-color: var(--sco-color);
+    color: #fff;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    width: 92%;
+    margin: 4px auto 4px auto;
+    font-weight: 700;
+  }
+  .AddNewShope .AddressBtn{
+    padding: 8px 16px;
+    background-color: var(--sco-color);
+    color: #fff;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    width: 84%;
+    margin: 4px auto 4px auto;
+    text-align: center;
+    font-size: 18px;
+    font-weight: 700;
+  }
+  .AddNewShope .AddressRemoveBtn{
+    padding: 8px 16px;
+    background-color: var(--sco-color);
+    color: #fff;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    width: 17%;
+    margin: 4px auto 4px 4px;
+    text-align: center;
+    font-size: 16px;
+    font-weight: 700;
+  }
+  
+  /* Adjust as needed */
+  

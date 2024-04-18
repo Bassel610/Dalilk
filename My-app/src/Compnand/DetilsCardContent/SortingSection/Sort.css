@@ -1,0 +1,61 @@
+.SortSection{
+    width: 100%;
+    height: 50px;
+    margin-top: 30px;
+    position: relative;
+    display: flex;
+    text-align: center;
+    align-items: center;
+    justify-content: center;
+}
+.SortSection .Contaner{
+    display: flex;
+    height: 92px;
+    flex-direction: row-reverse;
+    width: 62vw;
+    justify-content: center;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    border-radius: 8px;
+    align-items: center;
+}
+.SortSection .Contaner .SortBox{
+    width: calc(100% / 6);
+}
+
+.SortSection .Contaner select{
+    width: 81%;
+    height: 45px;
+    background-color: var(--main-color);
+    border-radius: 6px;
+    padding: 6px;
+    color: white;
+    font-weight: 600;
+    letter-spacing: 1px;
+    margin-top: 7px;
+}
+.SortSection .Contaner select:focus{
+    
+    background-color: var(--bold-color);
+}
+.SortSection .Contaner option{
+    background-color: white;
+    color: var(--sco-color);
+    font-size: large;
+    font-weight: 700;
+    text-align: right;
+}
+.SortSection .Contaner label{
+    color: var(--bold-color);
+    font-size: 21px;
+    font-weight: 700;
+    margin-bottom: 12px;
+}
+.SortSection .Contaner .SortBox .RemoveAllSort{
+    padding: 19px;
+    font-size: 20px;
+    font-weight: 700;
+    border-radius: 40%;
+    color: white;
+    background-color: var(--bold-color);
+    cursor: pointer;
+}

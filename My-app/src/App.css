@@ -1,0 +1,17 @@
+:root{
+  --main-color: #648B7F;
+  --sco-color: #557c6bfa;
+  --bold-color: #244c3f;
+}
+
+.Flex{
+  display: flex;
+}
+
+a{
+  text-decoration: none;
+  color: inherit;
+}
+.displaynon {
+  display: none;
+}

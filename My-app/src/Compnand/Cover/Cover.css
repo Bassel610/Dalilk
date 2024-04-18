@@ -1,0 +1,47 @@
+.CoverPage .FullPage{
+    width: 100%;
+    height: 558px;
+}
+.CoverPage .FullPage .BigImg{
+    width: 100%;
+    height: 100%;
+    background-size: cover;
+    /* margin-top: 180px; */
+}
+.CoverPage .FullPage .BigImg img{
+    width: 100%;
+    height: 100%;
+}
+.CoverPage .FullPage .CoverContent{
+
+}
+.CoverPage .FullPage .CoverContent .ImgCoverContent{
+    position: absolute;
+    top: 180px;
+    right: 50px;
+}
+.CoverPage .FullPage .CoverContent .ImgCoverContent .BigIcon{
+    width: 300px;
+}
+.CoverPage .FullPage .CoverContent .TextCoverContent{
+    position: absolute;
+    top: 178px;
+    right: 330px;
+}
+.CoverPage .FullPage .CoverContent .TextCoverContent div{
+    font-size: 150px;
+    color: #3f6d6e;
+}
+.CoverPage .FullPage .CoverContent .ScoTextCoverContent{
+    position: absolute;
+    top: 400px;
+    left: 80px;
+}
+.CoverPage .FullPage .CoverContent .ScoTextCoverContent div:nth-child(1){
+    font-size: 100px;
+    color: #3f6d6e;
+}
+.CoverPage .FullPage .CoverContent .ScoTextCoverContent div:nth-child(2){
+    font-size: 70px;
+    color: #3f6d6ed9;
+}

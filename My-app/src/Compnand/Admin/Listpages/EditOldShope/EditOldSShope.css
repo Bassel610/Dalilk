@@ -1,0 +1,50 @@
+.EditShopForm {
+    background-color: #f9f9f9;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    padding: 20px;
+    margin-bottom: 20px;
+  }
+  
+  .EditShopForm h2 {
+    margin-bottom: 20px;
+    color: #333;
+  }
+  
+  .EditShopForm form {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
+  }
+  
+  .EditShopForm label {
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .EditShopForm span {
+    margin-bottom: 5px;
+    color: #666;
+  }
+  
+  .EditShopForm input {
+    padding: 8px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+  }
+  
+  .EditShopForm button {
+    padding: 8px 16px;
+    background-color: var(--sco-color);
+    color: #fff;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+  }
+  
+  .EditShopForm button:hover {
+    background-color: var(--bold-color);
+  }
+  
+  /* Adjust as needed */
+  
