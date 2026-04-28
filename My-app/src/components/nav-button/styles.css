@@ -1,0 +1,35 @@
+.NavBtn {
+  padding: 9px 20px;
+  border-radius: 8px;
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.2s, color 0.2s, border-color 0.2s, transform 0.1s;
+  text-decoration: none;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border: 2px solid transparent;
+  font-family: inherit;
+  white-space: nowrap;
+}
+.NavBtn:active { transform: scale(0.97); }
+
+.NavBtn--outline {
+  background: transparent;
+  color: #fff;
+  border-color: rgba(255, 255, 255, 0.55);
+}
+.NavBtn--outline:hover {
+  background: rgba(255, 255, 255, 0.15);
+  border-color: #fff;
+}
+
+.NavBtn--solid {
+  background: #fff;
+  color: #244c3f;
+  border-color: #fff;
+}
+.NavBtn--solid:hover {
+  background: #e8f2ee;
+}

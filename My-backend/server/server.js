@@ -1,31 +1,47 @@
 const express = require('express');
 const cors = require('cors');
-const fs = require('fs').promises; // Import fs.promises for asynchronous file operations
-const path = require('path'); // Import path module
-const conservativeRouter = require('./APIs/conservativeAPI');
-const catigoryRouter = require('./APIs/catigoryAPI');
-const allshopeRouter = require('./APIs/allShops');
-const areaRouter = require('./APIs/areaAPI');
-const cardsRouter = require('./APIs/cardAPI');
-const hayRouter = require('./APIs/haySortAPI');
+const helmet = require('helmet');
+
+const config = require('./config');
+const logger = require('./utils/logger');
+const { requestLogger } = require('./middleware/request-logger');
+const { errorHandler } = require('./middleware/error-handler');
+const { apiLimiter } = require('./middleware/rate-limit');
+const apiRoutes = require('./routes');
 
 const app = express();
-const PORT = process.env.PORT || 5000;
 
-app.use(cors());
-app.use(express.json());
+// Security headers
+app.use(helmet());
 
-// Routes
-app.use(allshopeRouter);
-app.use( areaRouter);
-app.use(hayRouter);
-app.use(conservativeRouter);
-app.use(catigoryRouter);
-app.use(cardsRouter);
+// CORS — restrict origins via .env
+const allowAll = config.corsOrigins.length === 1 && config.corsOrigins[0] === '*';
+app.use(
+  cors({
+    origin: allowAll ? true : config.corsOrigins,
+    credentials: true,
+  }),
+);
 
-// Define route to get the content of the AreaSort section
+app.use(express.json({ limit: '1mb' }));
+app.use(requestLogger);
 
+// Health check
+app.get('/health', (_req, res) => res.json({ ok: true, env: config.env }));
 
-app.listen(PORT, () => {
-    console.log(`Server is running on port ${PORT}`);
+// Versioned API
+app.use('/api/v1', apiLimiter, apiRoutes);
+
+// 404
+app.use((req, res) => {
+  res.status(404).json({ error: 'Not found', code: 'NOT_FOUND', path: req.path });
+});
+
+app.use(errorHandler);
+
+app.listen(config.port, () => {
+  logger.info(
+    { port: config.port, env: config.env },
+    `Server running on http://localhost:${config.port}`,
+  );
 });

@@ -1,0 +1,95 @@
+.Footer {
+  background: linear-gradient(170deg, #244c3f 0%, #1a3830 100%);
+  color: #d4e8e0;
+  padding: 48px 24px 24px;
+  direction: rtl;
+}
+.Footer-shell {
+  max-width: 1200px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: 1.4fr 1fr 1fr 1fr;
+  gap: 36px 24px;
+}
+@media (max-width: 760px) {
+  .Footer-shell { grid-template-columns: 1fr 1fr; }
+}
+@media (max-width: 480px) {
+  .Footer-shell { grid-template-columns: 1fr; }
+}
+
+.Footer-brand h3 {
+  margin: 0 0 8px;
+  font-size: 20px;
+  color: #fff;
+  letter-spacing: -0.3px;
+}
+.Footer-brand p {
+  margin: 0;
+  font-size: 13px;
+  line-height: 1.7;
+  color: rgba(255, 255, 255, 0.7);
+  max-width: 280px;
+}
+
+.Footer-col h4 {
+  margin: 0 0 14px;
+  font-size: 13px;
+  font-weight: 700;
+  color: #fff;
+  letter-spacing: 0.4px;
+  text-transform: uppercase;
+}
+.Footer-col ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+.Footer-col li a {
+  color: rgba(255, 255, 255, 0.72);
+  text-decoration: none;
+  font-size: 13px;
+  font-weight: 500;
+  transition: color 0.15s;
+}
+.Footer-col li a:hover { color: #fff; }
+
+.Footer-socials {
+  display: flex;
+  gap: 8px;
+  margin-top: 14px;
+}
+.Footer-socials a {
+  width: 36px;
+  height: 36px;
+  border-radius: 10px;
+  background: rgba(255, 255, 255, 0.08);
+  color: rgba(255, 255, 255, 0.85);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  transition: background 0.15s, color 0.15s, transform 0.1s;
+}
+.Footer-socials a:hover {
+  background: rgba(255, 255, 255, 0.18);
+  color: #fff;
+  transform: translateY(-2px);
+}
+.Footer-socials a svg { width: 16px; height: 16px; }
+
+.Footer-bottom {
+  max-width: 1200px;
+  margin: 32px auto 0;
+  padding-top: 20px;
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  font-size: 12px;
+  color: rgba(255, 255, 255, 0.55);
+  flex-wrap: wrap;
+}

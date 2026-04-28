@@ -1,0 +1,187 @@
+.Header {
+  width: 100%;
+  position: relative;
+  z-index: 50;
+}
+.Header .CoverNavBar {
+  width: 100%;
+  height: 180px;
+  background-color: #648b7f;
+  position: relative;
+  top: 0;
+}
+.Header .CoverNavBar .Logo {
+  width: 150px;
+  height: 150px;
+  float: left;
+}
+.Header .CoverNavBar .Logo img {
+  width: 100%;
+  height: 100%;
+  margin: 10px 10px 0 20px;
+}
+.Header .CoverNavBar .Search {
+  position: absolute;
+  right: 46px;
+  top: 75px;
+}
+
+.CatList,
+.CatListDis {
+  width: 77%;
+  position: absolute;
+  top: 130px;
+  right: 0;
+}
+.CatListDis { display: none; }
+.CatList ul,
+.CatListDis ul {
+  display: flex;
+  flex-wrap: wrap;
+  margin: 0;
+  padding: 0 20px 0 0;
+  gap: 6px;
+  justify-content: flex-start;
+}
+.CatList ul li,
+.CatListDis ul li {
+  list-style: none;
+  cursor: pointer;
+}
+.CatList ul li a,
+.CatListDis ul li a {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 7px 14px;
+  font-size: 14px;
+  font-weight: 600;
+  color: rgba(255, 255, 255, 0.78);
+  border-radius: 999px;
+  background: transparent;
+  border: 1.5px solid transparent;
+  transition: background 0.18s, color 0.18s, border-color 0.18s;
+  white-space: nowrap;
+}
+.CatList ul li a svg,
+.CatListDis ul li a svg {
+  width: 14px;
+  height: 14px;
+  opacity: 0.75;
+  transition: opacity 0.18s;
+}
+.CatList ul li a:hover,
+.CatListDis ul li a:hover {
+  color: #fff;
+  background: rgba(255, 255, 255, 0.12);
+}
+.CatList ul li a:hover svg,
+.CatListDis ul li a:hover svg { opacity: 1; }
+.CatList ul li.is-active a,
+.CatListDis ul li.is-active a {
+  background: #fff;
+  color: #244c3f;
+  border-color: #fff;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.12);
+}
+.CatList ul li.is-active a svg,
+.CatListDis ul li.is-active a svg { opacity: 1; }
+
+.AuthNav {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  position: absolute;
+  right: 24px;
+  top: 18px;
+}
+.AuthNav-email {
+  font-size: 13px;
+  color: rgba(255, 255, 255, 0.85);
+  max-width: 160px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+/* ───────── Tablet (≤ 900px) ───────── */
+@media only screen and (max-width: 900px) {
+  .CatList { display: none; }
+  .CatListDis { display: block; }
+}
+
+/* ───────── Compact (≤ 760px) - stack rows ───────── */
+@media only screen and (max-width: 760px) {
+  .Header .CoverNavBar {
+    height: auto;
+    min-height: 64px;
+    padding: 12px 14px;
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+  }
+  .Header .CoverNavBar .Logo {
+    float: none;
+    width: 56px;
+    height: 56px;
+    flex-shrink: 0;
+  }
+  .Header .CoverNavBar .Logo img {
+    margin: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+  }
+  .AuthNav {
+    top: 16px;
+    right: 14px;
+    inset-inline-end: 14px;
+  }
+  .Header .CoverNavBar .Search {
+    position: static;
+    width: 100%;
+  }
+  .Header .CoverNavBar .Search .SearchInput {
+    width: 100%;
+  }
+  .Header .CoverNavBar .Search .SearchInput input {
+    width: 100%;
+    flex: 1;
+    min-width: 0;
+  }
+  .Header .CoverNavBar .Search .SearchInput-btn {
+    flex-shrink: 0;
+  }
+  .CatListDis {
+    position: static;
+    width: 100%;
+    overflow-x: auto;
+    overflow-y: hidden;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: none;
+  }
+  .CatListDis::-webkit-scrollbar { display: none; }
+  .CatListDis ul {
+    flex-wrap: nowrap;
+    padding: 0;
+    width: max-content;
+    min-width: 100%;
+    gap: 6px;
+  }
+}
+
+/* ───────── Phone (≤ 480px) ───────── */
+@media only screen and (max-width: 480px) {
+  .Header .CoverNavBar { padding: 10px 12px; }
+  .AuthNav { gap: 6px; }
+  .AuthNav .NavBtn {
+    padding: 7px 12px;
+    font-size: 13px;
+  }
+  .ProfileChip-trigger {
+    padding-inline-end: 10px;
+  }
+  .ProfileChip-name {
+    max-width: 80px;
+  }
+}

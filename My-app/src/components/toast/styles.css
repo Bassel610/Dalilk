@@ -1,0 +1,81 @@
+.ToastViewport {
+  position: fixed;
+  bottom: 24px;
+  inset-inline-end: 24px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  z-index: 9999;
+  pointer-events: none;
+  max-width: calc(100vw - 48px);
+}
+
+.Toast {
+  pointer-events: auto;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 12px 16px;
+  border-radius: 12px;
+  background: #fff;
+  box-shadow: 0 8px 28px rgba(36, 76, 63, 0.18), 0 2px 6px rgba(36, 76, 63, 0.06);
+  border: 1px solid rgba(36, 76, 63, 0.05);
+  min-width: 260px;
+  max-width: 380px;
+  font-family: inherit;
+  font-size: 14px;
+  color: #244c3f;
+  animation: toastIn 0.22s cubic-bezier(0.22, 1, 0.36, 1);
+  direction: rtl;
+}
+.Toast.is-leaving {
+  animation: toastOut 0.18s ease forwards;
+}
+
+@keyframes toastIn {
+  from { opacity: 0; transform: translateY(20px) scale(0.96); }
+  to   { opacity: 1; transform: translateY(0) scale(1); }
+}
+@keyframes toastOut {
+  to { opacity: 0; transform: translateY(8px) scale(0.98); }
+}
+
+.Toast-icon {
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  color: #fff;
+}
+.Toast-icon svg { width: 14px; height: 14px; }
+
+.Toast--success .Toast-icon { background: #2ecc71; }
+.Toast--error .Toast-icon { background: #e74c3c; }
+.Toast--info .Toast-icon { background: #648b7f; }
+
+.Toast-body {
+  flex: 1;
+  min-width: 0;
+  font-weight: 500;
+  line-height: 1.4;
+  word-wrap: break-word;
+}
+.Toast-close {
+  flex-shrink: 0;
+  width: 24px;
+  height: 24px;
+  border: none;
+  background: transparent;
+  color: #8aab9e;
+  cursor: pointer;
+  border-radius: 6px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  transition: background 0.15s, color 0.15s;
+}
+.Toast-close:hover { background: #f0f7f3; color: #244c3f; }
+.Toast-close svg { width: 14px; height: 14px; }

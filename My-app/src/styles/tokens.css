@@ -1,0 +1,64 @@
+:root {
+  /* Brand greens (existing, kept for backward-compat) */
+  --main-color: #648b7f;
+  --sco-color: #557c6bfa;
+  --bold-color: #244c3f;
+
+  /* Surface */
+  --surface-0: #ffffff;
+  --surface-1: #f5faf8;
+  --surface-2: #e8f2ee;
+  --surface-3: #d4e8e0;
+  --surface-mute: #f0f7f3;
+
+  /* Borders */
+  --border-soft: #e0ede8;
+  --border-default: #d5e8e0;
+  --border-strong: #93bfb2;
+
+  /* Text */
+  --text-1: #244c3f;
+  --text-2: #3a6b5c;
+  --text-3: #557c6b;
+  --text-mute: #8aab9e;
+  --text-faint: #93bfb2;
+
+  /* Status */
+  --success: #2ecc71;
+  --success-bg: #e8f5e8;
+  --warning: #f5b842;
+  --danger: #c0392b;
+  --danger-bg: #fef2f0;
+  --info: #648b7f;
+
+  /* Effects */
+  --shadow-sm: 0 1px 2px rgba(36, 76, 63, 0.06);
+  --shadow-md: 0 4px 14px rgba(36, 76, 63, 0.08);
+  --shadow-lg: 0 8px 28px rgba(36, 76, 63, 0.16);
+  --shadow-xl: 0 18px 50px rgba(36, 76, 63, 0.28);
+  --ring-focus: 0 0 0 3px rgba(100, 139, 127, 0.18);
+
+  /* Radii */
+  --r-xs: 6px;
+  --r-sm: 8px;
+  --r-md: 10px;
+  --r-lg: 14px;
+  --r-xl: 18px;
+  --r-pill: 999px;
+
+  /* Easing */
+  --ease-out: cubic-bezier(0.22, 1, 0.36, 1);
+
+  /* Type */
+  --font-display: 'Cairo', 'Segoe UI', system-ui, -apple-system, sans-serif;
+  --font-body: 'Cairo', 'Segoe UI', system-ui, -apple-system, sans-serif;
+}
+
+/* Page enter transition */
+@keyframes pageFade {
+  from { opacity: 0; transform: translateY(6px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+.PageFade {
+  animation: pageFade 0.28s var(--ease-out);
+}

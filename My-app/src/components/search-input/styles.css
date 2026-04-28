@@ -1,0 +1,41 @@
+.SearchInput {
+  display: flex;
+  align-items: center;
+  gap: 0;
+}
+.SearchInput input {
+  width: 260px;
+  height: 46px;
+  padding: 0 14px;
+  border: none;
+  border-radius: 8px 0 0 8px;
+  outline: none;
+  font-size: 15px;
+  box-sizing: border-box;
+}
+.SearchInput .SearchInput-btn {
+  background-color: #557c6bfa;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 90px;
+  height: 46px;
+  border-radius: 0 8px 8px 0;
+  cursor: pointer;
+  transition: background 0.2s;
+  border: none;
+  color: white;
+  font-size: 18px;
+  font-weight: 600;
+  font-family: inherit;
+  padding: 0;
+}
+.SearchInput .SearchInput-btn:hover {
+  background-color: #244c3f;
+}
+
+@media only screen and (max-width: 690px) {
+  .SearchInput input {
+    width: 170px;
+  }
+}

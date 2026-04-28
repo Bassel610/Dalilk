@@ -1,0 +1,285 @@
+.ShopForm {
+  display: flex;
+  flex-direction: column;
+}
+
+.ShopForm-section {
+  padding: 22px 24px;
+  border-bottom: 1px solid #eef4f1;
+}
+.ShopForm-section:last-of-type {
+  border-bottom: none;
+}
+.ShopForm-section h3 {
+  margin: 0 0 4px;
+  font-size: 15px;
+  font-weight: 700;
+  color: #244c3f;
+  letter-spacing: -0.2px;
+}
+.ShopForm-section p.section-hint {
+  margin: 0 0 14px;
+  font-size: 12px;
+  color: #93bfb2;
+}
+
+.ShopForm-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  gap: 14px;
+}
+.ShopForm-grid--2col { grid-template-columns: 1fr 1fr; }
+.ShopForm-grid--1col { grid-template-columns: 1fr; }
+
+@media (max-width: 720px) {
+  .ShopForm-grid,
+  .ShopForm-grid--2col,
+  .ShopForm-grid--3col { grid-template-columns: 1fr; }
+}
+
+.ShopField {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  min-width: 0;
+}
+.ShopField label {
+  font-size: 12px;
+  font-weight: 600;
+  color: #3a6b5c;
+  letter-spacing: 0.2px;
+}
+.ShopField input,
+.ShopField select,
+.ShopField textarea {
+  width: 100%;
+  padding: 10px 12px;
+  border: 1.5px solid #d5e8e0;
+  border-radius: 9px;
+  background: #f7fbf9;
+  color: #244c3f;
+  font-family: inherit;
+  font-size: 14px;
+  outline: none;
+  box-sizing: border-box;
+  transition: border-color 0.15s, background 0.15s, box-shadow 0.15s;
+  min-height: 40px;
+}
+.ShopField input:focus,
+.ShopField select:focus,
+.ShopField textarea:focus {
+  border-color: #648b7f;
+  background: #fff;
+  box-shadow: 0 0 0 3px rgba(100, 139, 127, 0.15);
+}
+.ShopField input:disabled,
+.ShopField select:disabled {
+  background: #f0f5f3;
+  color: #98b3aa;
+  cursor: not-allowed;
+}
+.ShopField textarea {
+  min-height: 80px;
+  resize: vertical;
+  line-height: 1.55;
+}
+
+/* Star rating */
+.ShopRate {
+  display: flex;
+  gap: 4px;
+  align-items: center;
+  padding: 6px 0;
+}
+.ShopRate button {
+  width: 32px;
+  height: 32px;
+  border: none;
+  background: transparent;
+  cursor: pointer;
+  padding: 0;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  color: #cfe2da;
+  transition: color 0.15s, transform 0.1s;
+}
+.ShopRate button:hover { color: #f5b842; transform: scale(1.1); }
+.ShopRate button.is-on { color: #f5b842; }
+.ShopRate button svg { width: 22px; height: 22px; }
+.ShopRate-label {
+  font-size: 12px;
+  color: #93bfb2;
+  margin-inline-start: 8px;
+}
+
+/* Chip multiselect */
+.ShopChips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+.ShopChip {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 7px 14px;
+  background: #f0f7f3;
+  color: #557c6b;
+  border: 1.5px solid #d5e8e0;
+  border-radius: 999px;
+  cursor: pointer;
+  font-family: inherit;
+  font-size: 13px;
+  font-weight: 600;
+  transition: background 0.15s, border-color 0.15s, color 0.15s;
+}
+.ShopChip:hover {
+  border-color: #93bfb2;
+  background: #e3f0ea;
+}
+.ShopChip.is-selected {
+  background: linear-gradient(135deg, #648b7f, #244c3f);
+  color: #fff;
+  border-color: transparent;
+}
+.ShopChip.is-selected svg { display: inline-block; }
+.ShopChip svg { display: none; width: 14px; height: 14px; }
+
+/* Multi-input list (addresses, locations) */
+.ShopList {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  max-width: 640px;
+}
+.ShopList-row {
+  display: flex;
+  gap: 8px;
+  align-items: center;
+}
+.ShopList-row input {
+  flex: 1;
+  height: 40px;
+  padding: 10px 14px;
+  border: 1.5px solid #d5e8e0;
+  border-radius: 9px;
+  background: #f7fbf9;
+  color: #244c3f;
+  font-family: inherit;
+  font-size: 14px;
+  outline: none;
+  box-sizing: border-box;
+  transition: border-color 0.15s, background 0.15s, box-shadow 0.15s;
+}
+.ShopList-row input::placeholder {
+  color: #b8cdc4;
+}
+.ShopList-row input:focus {
+  border-color: #648b7f;
+  background: #fff;
+  box-shadow: 0 0 0 3px rgba(100, 139, 127, 0.15);
+}
+.ShopList-removeBtn {
+  width: 36px;
+  height: 36px;
+  border: 1.5px solid #f4d9d6;
+  background: #fef6f5;
+  color: #c0392b;
+  border-radius: 9px;
+  cursor: pointer;
+  font-size: 18px;
+  font-weight: 700;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  transition: background 0.15s, border-color 0.15s;
+}
+.ShopList-removeBtn:hover { background: #fde4e1; border-color: #e9b3ad; }
+.ShopList-addBtn {
+  align-self: flex-start;
+  margin-top: 6px;
+  padding: 8px 14px;
+  background: transparent;
+  border: 1.5px dashed #93bfb2;
+  color: #557c6b;
+  border-radius: 9px;
+  cursor: pointer;
+  font-family: inherit;
+  font-size: 13px;
+  font-weight: 600;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  transition: background 0.15s, border-color 0.15s, color 0.15s;
+}
+.ShopList-addBtn:hover {
+  border-color: #648b7f;
+  color: #244c3f;
+  background: #f0f7f3;
+}
+
+/* Footer */
+.ShopForm-footer {
+  position: sticky;
+  bottom: 0;
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 12px;
+  padding: 16px 24px;
+  background: #fff;
+  border-top: 1px solid #eef4f1;
+  border-radius: 0 0 16px 16px;
+}
+.ShopForm-footer .msg {
+  margin-inline-end: auto;
+  font-size: 13px;
+  font-weight: 500;
+}
+.ShopForm-footer .msg.success { color: #1f7a4d; }
+.ShopForm-footer .msg.error { color: #c0392b; }
+
+.ShopBtn {
+  padding: 10px 22px;
+  border: none;
+  border-radius: 9px;
+  cursor: pointer;
+  font-family: inherit;
+  font-size: 14px;
+  font-weight: 600;
+  transition: background 0.15s, box-shadow 0.15s, transform 0.1s;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+}
+.ShopBtn:active { transform: scale(0.98); }
+.ShopBtn:disabled { opacity: 0.6; cursor: not-allowed; transform: none; }
+.ShopBtn--primary {
+  background: linear-gradient(135deg, #648b7f, #244c3f);
+  color: #fff;
+  box-shadow: 0 3px 12px rgba(36, 76, 63, 0.25);
+}
+.ShopBtn--primary:hover:not(:disabled) {
+  box-shadow: 0 5px 18px rgba(36, 76, 63, 0.38);
+}
+.ShopBtn--ghost {
+  background: transparent;
+  color: #557c6b;
+  border: 1.5px solid #d5e8e0;
+}
+.ShopBtn--ghost:hover:not(:disabled) {
+  border-color: #648b7f;
+  background: #f0f7f3;
+}
+
+.ShopBtn .spinner {
+  width: 14px;
+  height: 14px;
+  border: 2px solid rgba(255,255,255,0.4);
+  border-top-color: #fff;
+  border-radius: 50%;
+  animation: shopSpin 0.7s linear infinite;
+}
+@keyframes shopSpin { to { transform: rotate(360deg); } }

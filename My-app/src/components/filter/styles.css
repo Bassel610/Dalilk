@@ -1,0 +1,76 @@
+.SortSection {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  margin-top: 18px;
+}
+.SortSection .Contaner {
+  width: 92%;
+  max-width: 1300px;
+  background: #fff;
+  border-radius: 14px;
+  box-shadow: 0 4px 14px rgba(36, 76, 63, 0.08);
+  padding: 14px 18px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 14px;
+  justify-content: center;
+  align-items: flex-end;
+  direction: rtl;
+}
+.SortSection .SortBox {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  flex: 1 1 150px;
+  min-width: 130px;
+}
+.SortSection .SortBox label {
+  font-size: 13px;
+  font-weight: 600;
+  color: #244c3f;
+}
+.SortSection .SortBox select {
+  height: 42px;
+  padding: 0 12px;
+  border-radius: 8px;
+  border: 1.5px solid #d5e8e0;
+  background: #f5faf8;
+  color: #244c3f;
+  font-size: 14px;
+  outline: none;
+  cursor: pointer;
+  transition: border-color 0.2s, box-shadow 0.2s;
+  font-family: inherit;
+}
+.SortSection .SortBox select:focus {
+  border-color: #648b7f;
+  box-shadow: 0 0 0 3px rgba(100, 139, 127, 0.15);
+}
+.SortSection .SortBox.is-disabled label {
+  color: #b8cdc4;
+}
+.SortSection .SortBox.is-disabled select {
+  background: #f0f5f3;
+  color: #b8cdc4;
+  cursor: not-allowed;
+  border-color: #e8efeb;
+}
+.SortSection .RemoveAllSort {
+  height: 42px;
+  padding: 0 18px;
+  border-radius: 8px;
+  background: linear-gradient(135deg, #648b7f, #244c3f);
+  color: #fff;
+  font-size: 14px;
+  font-weight: 600;
+  border: none;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  font-family: inherit;
+  transition: box-shadow 0.2s;
+}
+.SortSection .RemoveAllSort:hover {
+  box-shadow: 0 4px 14px rgba(36, 76, 63, 0.3);
+}

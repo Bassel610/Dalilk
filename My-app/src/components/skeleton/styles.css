@@ -1,0 +1,66 @@
+.Skeleton {
+  display: inline-block;
+  background: linear-gradient(
+    90deg,
+    #eaf2ee 0%,
+    #d9eae2 50%,
+    #eaf2ee 100%
+  );
+  background-size: 200% 100%;
+  animation: skeletonShimmer 1.4s ease-in-out infinite;
+}
+
+@keyframes skeletonShimmer {
+  0%   { background-position: 200% 0; }
+  100% { background-position: -200% 0; }
+}
+
+.SkeletonText {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.CardSkeletons {
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+  max-width: 1200px;
+  margin: 24px auto;
+  width: 92%;
+  padding: 18px;
+  background: #fff;
+  border-radius: 14px;
+}
+.CardSkeleton {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  padding: 22px 24px;
+  border: 2px solid #e0ede8;
+  border-radius: 12px;
+  background: #fff;
+  direction: rtl;
+}
+.CardSkeleton-row {
+  display: flex;
+  gap: 8px;
+  margin-top: 4px;
+}
+
+.RowSkeletons {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  padding: 16px 24px;
+}
+.RowSkeleton {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  padding: 16px 20px;
+  border: 1px solid #e0ede8;
+  border-radius: 12px;
+  background: #fff;
+  direction: rtl;
+}

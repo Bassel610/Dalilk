@@ -1,0 +1,170 @@
+.ProfileChip {
+  position: relative;
+  display: inline-flex;
+}
+
+.ProfileChip-trigger {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  padding: 6px 14px 6px 6px;
+  border: 1.5px solid rgba(255, 255, 255, 0.3);
+  background: rgba(255, 255, 255, 0.08);
+  border-radius: 999px;
+  cursor: pointer;
+  color: #fff;
+  font-family: inherit;
+  font-size: 14px;
+  font-weight: 600;
+  transition: background 0.2s, border-color 0.2s, transform 0.1s;
+  direction: ltr;
+}
+.ProfileChip-trigger:hover {
+  background: rgba(255, 255, 255, 0.16);
+  border-color: rgba(255, 255, 255, 0.55);
+}
+.ProfileChip-trigger:active { transform: scale(0.97); }
+.ProfileChip-trigger.is-open {
+  background: rgba(255, 255, 255, 0.18);
+  border-color: #fff;
+}
+
+.ProfileChip-avatar {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, #fff 0%, #e8f2ee 100%);
+  color: #244c3f;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 700;
+  font-size: 14px;
+  flex-shrink: 0;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.18) inset, 0 1px 2px rgba(0, 0, 0, 0.18);
+  letter-spacing: 0;
+}
+
+.ProfileChip-name {
+  max-width: 140px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  font-size: 13px;
+  font-weight: 600;
+  letter-spacing: 0.2px;
+}
+
+.ProfileChip-caret {
+  width: 14px;
+  height: 14px;
+  margin-inline-start: 2px;
+  opacity: 0.85;
+  transition: transform 0.2s;
+  flex-shrink: 0;
+}
+.ProfileChip-trigger.is-open .ProfileChip-caret {
+  transform: rotate(180deg);
+}
+
+/* Dropdown panel */
+.ProfileChip-menu {
+  position: absolute;
+  top: calc(100% + 10px);
+  right: 0;
+  min-width: 240px;
+  max-width: calc(100vw - 32px);
+  background: #fff;
+  border-radius: 14px;
+  box-shadow:
+    0 12px 40px rgba(36, 76, 63, 0.18),
+    0 2px 6px rgba(36, 76, 63, 0.08);
+  padding: 6px;
+  z-index: 200;
+  transform-origin: top right;
+  animation: chipMenuIn 0.18s cubic-bezier(0.22, 1, 0.36, 1);
+  direction: rtl;
+  border: 1px solid rgba(36, 76, 63, 0.06);
+  overflow: hidden;
+}
+.ProfileChip-menu::before {
+  content: '';
+  position: absolute;
+  inset-inline-start: 0;
+  top: 0;
+  bottom: 0;
+  width: 3px;
+  background: linear-gradient(180deg, #648b7f, #244c3f);
+}
+
+@keyframes chipMenuIn {
+  from { opacity: 0; transform: translateY(-6px) scale(0.96); }
+  to   { opacity: 1; transform: translateY(0) scale(1); }
+}
+
+.ProfileChip-header {
+  padding: 14px 16px 12px;
+  border-bottom: 1px solid #eef4f1;
+  margin-bottom: 4px;
+}
+.ProfileChip-header .name {
+  font-size: 15px;
+  font-weight: 700;
+  color: #244c3f;
+  margin: 0 0 2px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.ProfileChip-header .email {
+  font-size: 12px;
+  color: #8aab9e;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.ProfileChip-item {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  width: 100%;
+  padding: 11px 14px;
+  border: none;
+  background: transparent;
+  cursor: pointer;
+  font-family: inherit;
+  font-size: 14px;
+  font-weight: 500;
+  color: #2f5246;
+  text-align: start;
+  border-radius: 8px;
+  transition: background 0.15s, color 0.15s;
+  text-decoration: none;
+}
+.ProfileChip-item:hover {
+  background: #f0f7f3;
+  color: #244c3f;
+}
+.ProfileChip-item svg {
+  width: 16px;
+  height: 16px;
+  color: #648b7f;
+  flex-shrink: 0;
+}
+.ProfileChip-item--danger {
+  color: #b54237;
+}
+.ProfileChip-item--danger:hover {
+  background: #fdf3f2;
+  color: #8e2e26;
+}
+.ProfileChip-item--danger svg {
+  color: #c0392b;
+}
+
+.ProfileChip-divider {
+  height: 1px;
+  background: #eef4f1;
+  margin: 4px 8px;
+}
