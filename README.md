@@ -4,6 +4,7 @@
 
 **A full-stack web application for audio capture, data persistence, and PDF report generation**
 
+[![CI](https://github.com/Bassel610/Dalilk/actions/workflows/ci.yml/badge.svg)](https://github.com/Bassel610/Dalilk/actions/workflows/ci.yml)
 [![React](https://img.shields.io/badge/React-18.2-61DAFB?logo=react&logoColor=white)](https://reactjs.org/)
 [![Express](https://img.shields.io/badge/Express-4.18-000000?logo=express&logoColor=white)](https://expressjs.com/)
 [![Firebase](https://img.shields.io/badge/Firebase-12-FFCA28?logo=firebase&logoColor=black)](https://firebase.google.com/)
