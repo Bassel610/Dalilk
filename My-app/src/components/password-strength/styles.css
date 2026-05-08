@@ -1,0 +1,13 @@
+.PwStrength {
+  margin-top: 6px;
+}
+.PwStrength-bars {
+  display: flex;
+  gap: 4px;
+}
+.PwStrength-bar {
+  flex: 1;
+  height: 4px;
+  border-radius: 2px;
+  transition: background 0.3s;
+}

@@ -1,0 +1,35 @@
+.SectionHead {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  margin-bottom: 16px;
+}
+
+.SectionHead--center {
+  text-align: center;
+  justify-content: center;
+}
+
+.SectionHead-text {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.SectionHead-title {
+  margin: 0;
+  font-size: 20px;
+  font-weight: 700;
+  color: #1f2937;
+}
+
+.SectionHead-subtitle {
+  margin: 0;
+  color: #6b7280;
+  font-size: 13px;
+}
+
+.SectionHead-action {
+  flex-shrink: 0;
+}

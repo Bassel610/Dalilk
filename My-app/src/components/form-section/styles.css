@@ -1,0 +1,66 @@
+.FormSection {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  padding: 16px 0;
+  border-top: 1px solid #f1f3f5;
+}
+.FormSection:first-child {
+  border-top: 0;
+  padding-top: 0;
+}
+
+.FormSection-head {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.FormSection-title {
+  margin: 0;
+  font-size: 16px;
+  font-weight: 700;
+  color: #1f2937;
+}
+
+.FormSection-hint {
+  margin: 0;
+  color: #6b7280;
+  font-size: 13px;
+}
+
+.FormSection-body {
+  display: grid;
+  gap: 12px;
+}
+
+.FormSection-body--grid {
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+}
+
+.FormSection-body--two-col {
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+
+.FormSection-body--single {
+  grid-template-columns: 1fr;
+}
+
+.FormSection-body--stack {
+  display: flex;
+  flex-direction: column;
+}
+
+.FormSection-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  align-items: center;
+  justify-content: flex-end;
+}
+
+@media (max-width: 640px) {
+  .FormSection-body--two-col {
+    grid-template-columns: 1fr;
+  }
+}
