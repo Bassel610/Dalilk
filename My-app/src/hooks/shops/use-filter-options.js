@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { shopsService } from '../services/shops-service';
+import { shopsService } from '../../services/shops-service';
 
 const empty = {
   conservatives: [],

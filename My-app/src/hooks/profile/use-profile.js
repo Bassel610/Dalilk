@@ -1,6 +1,6 @@
 import { useEffect, useState, useCallback } from 'react';
-import { profileService } from '../services/profile-service';
-import { useAuth } from './use-auth';
+import { profileService } from '../../services/profile-service';
+import { useAuth } from '../auth/use-auth';
 
 const emptyProfile = {
   uid: null,

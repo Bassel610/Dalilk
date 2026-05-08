@@ -1,7 +1,7 @@
 import { useEffect, useState, useCallback } from 'react';
-import { usersService } from '../services/users-service';
+import { usersService } from '../../services/users-service';
 
-export function useUsers() {
+export function useUsersList() {
   const [users, setUsers] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
@@ -24,15 +24,8 @@ export function useUsers() {
     reload();
   }, [reload]);
 
-  const create = async (data) => {
-    await usersService.create(data);
-    await reload();
-  };
-
-  const remove = async (uid) => {
-    await usersService.remove(uid);
+  const removeLocal = (uid) =>
     setUsers((prev) => prev.filter((u) => u.uid !== uid));
-  };
 
-  return { users, loading, error, reload, create, remove };
+  return { users, loading, error, reload, removeLocal };
 }

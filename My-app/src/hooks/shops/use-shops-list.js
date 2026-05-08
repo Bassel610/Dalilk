@@ -1,13 +1,8 @@
 import { useEffect, useState, useCallback, useRef } from 'react';
-import { shopsService } from '../services/shops-service';
+import { shopsService } from '../../services/shops-service';
+import { unwrapShopsResponse } from '../../lib/hooks/shops';
 
-function unwrap(res) {
-  if (Array.isArray(res)) return { items: res, total: res.length };
-  if (res && Array.isArray(res.items)) return res;
-  return { items: [], total: 0 };
-}
-
-export function useShops(filters) {
+export function useShopsList(filters) {
   const [shops, setShops] = useState([]);
   const [meta, setMeta] = useState({ total: 0, limit: 0, offset: 0, hasMore: false });
   const [loading, setLoading] = useState(true);
@@ -22,7 +17,7 @@ export function useShops(filters) {
       try {
         const res = await shopsService.list(overrideFilters ?? filters);
         if (reqId !== reqIdRef.current) return;
-        const { items, total, limit, offset, hasMore } = unwrap(res);
+        const { items, total, limit, offset, hasMore } = unwrapShopsResponse(res);
         setShops(items);
         setMeta({ total, limit, offset, hasMore: !!hasMore });
       } catch (e) {
@@ -40,20 +35,7 @@ export function useShops(filters) {
     reload();
   }, [reload]);
 
-  const remove = async (id) => {
-    await shopsService.remove(id);
-    setShops((prev) => prev.filter((s) => s.id !== id));
-  };
+  const removeLocal = (id) => setShops((prev) => prev.filter((s) => s.id !== id));
 
-  const create = async (shop) => {
-    await shopsService.create(shop);
-    await reload();
-  };
-
-  const update = async (id, shop) => {
-    await shopsService.update(id, shop);
-    await reload();
-  };
-
-  return { shops, meta, loading, error, reload, remove, create, update };
+  return { shops, meta, loading, error, reload, removeLocal };
 }
