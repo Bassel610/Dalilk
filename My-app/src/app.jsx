@@ -1,8 +1,8 @@
 import { useState, lazy, Suspense } from 'react';
 import { Route, Routes, useNavigate, useLocation } from 'react-router-dom';
 import './App.css';
-import { ROUTES } from './constants/routes';
-import { TEXT } from './constants/ui-text';
+import { ROUTES } from './constants/app/routes';
+import { TEXT } from './constants/app/ui-text';
 import ProtectedRoute from './components/protected-route';
 
 const HomePage = lazy(() => import('./pages/home'));
