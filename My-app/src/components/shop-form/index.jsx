@@ -1,54 +1,27 @@
 import { useEffect, useMemo, useState } from 'react';
-import { useFilterOptions } from '../../hooks/use-filter-options';
-import { TEXT } from '../../constants/ui-text';
+import { useFilterOptions } from '../../hooks/shops/use-filter-options';
+import Button from '../button';
+import Input from '../input';
+import { TEXT } from '../../constants/app/ui-text';
+import { EMPTY_SHOP, SHOP_FORM_TEXT } from '../../constants/components/shop-form';
+import { IconCheck, IconStar, IconPlus } from '../icons';
 import './styles.css';
-
-const emptyShop = {
-  Name: '',
-  LandMark: '',
-  rate: '',
-  category: [],
-  Address: [''],
-  location: [''],
-  AddressDetiles: { Conservative: '', Area: '', Hay: '' },
-};
-
-function IconCheck() {
-  return (
-    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.4" strokeLinecap="round" strokeLinejoin="round">
-      <polyline points="20 6 9 17 4 12" />
-    </svg>
-  );
-}
-function IconStar({ filled }) {
-  return (
-    <svg viewBox="0 0 24 24" fill={filled ? 'currentColor' : 'none'} stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-      <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2" />
-    </svg>
-  );
-}
-function IconPlus() {
-  return (
-    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round">
-      <line x1="12" y1="5" x2="12" y2="19" /><line x1="5" y1="12" x2="19" y2="12" />
-    </svg>
-  );
-}
 
 function StarRate({ value, onChange }) {
   const num = Number(value) || 0;
   return (
     <div className="ShopRate" role="radiogroup" aria-label="Rate">
       {[1, 2, 3, 4, 5].map((n) => (
-        <button
-          type="button"
+        <Button
           key={n}
-          className={n <= num ? 'is-on' : ''}
+          variant="ghost"
+          size="sm"
+          className={`ShopRate-star ${n <= num ? 'is-on' : ''}`.trim()}
           onClick={() => onChange(String(n === num ? n - 1 : n))}
           aria-label={`${n} stars`}
         >
           <IconStar filled={n <= num} />
-        </button>
+        </Button>
       ))}
       <span className="ShopRate-label">{num ? `${num}/5` : '—'}</span>
     </div>
@@ -66,15 +39,16 @@ function Chips({ options, value, onChange }) {
   return (
     <div className="ShopChips">
       {options.map((opt) => (
-        <button
-          type="button"
+        <Button
           key={opt.key}
+          variant="ghost"
+          size="sm"
           className={`ShopChip ${set.has(opt.label) ? 'is-selected' : ''}`.trim()}
+          startIcon={<IconCheck />}
           onClick={() => toggle(opt.label)}
         >
-          <IconCheck />
           {opt.label}
-        </button>
+        </Button>
       ))}
     </div>
   );
@@ -93,22 +67,40 @@ function ListInputs({ items, onChange, placeholder, addLabel, type = 'text' }) {
     <div className="ShopList">
       {items.map((v, i) => (
         <div className="ShopList-row" key={i}>
-          <input
+          <Input
             type={type}
             value={v || ''}
             onChange={(e) => update(i, e.target.value)}
             placeholder={`${placeholder} ${i + 1}`}
           />
           {items.length > 1 && (
-            <button type="button" className="ShopList-removeBtn" onClick={() => remove(i)} aria-label="Remove">×</button>
+            <Button
+              variant="ghost"
+              size="sm"
+              className="ShopList-removeBtn"
+              onClick={() => remove(i)}
+              aria-label="Remove"
+            >
+              ×
+            </Button>
           )}
         </div>
       ))}
-      <button type="button" className="ShopList-addBtn" onClick={add}>
-        <IconPlus /> {addLabel}
-      </button>
+      <Button
+        variant="ghost"
+        size="sm"
+        className="ShopList-addBtn"
+        startIcon={<IconPlus />}
+        onClick={add}
+      >
+        {addLabel}
+      </Button>
     </div>
   );
+}
+
+function buildSelectOptions(opts) {
+  return (opts || []).map((o) => ({ value: o.label, label: o.label }));
 }
 
 export default function ShopForm({
@@ -118,12 +110,11 @@ export default function ShopForm({
   onSubmit,
   onCancel,
 }) {
-  const [shop, setShop] = useState(emptyShop);
+  const [shop, setShop] = useState(EMPTY_SHOP);
   const [submitting, setSubmitting] = useState(false);
   const [msg, setMsg] = useState(null);
   const options = useFilterOptions();
 
-  // hydrate when initialValue arrives
   useEffect(() => {
     if (initialValue) {
       setShop({
@@ -152,7 +143,6 @@ export default function ShopForm({
     setMsg(null);
   };
 
-  // resolve dependent dropdowns by Arabic label, since shop docs store labels
   const conservativeOptions = options.conservatives || [];
   const areaOptions = useMemo(() => {
     const cons = conservativeOptions.find((c) => c.label === shop.AddressDetiles.Conservative);
@@ -189,38 +179,34 @@ export default function ShopForm({
   return (
     <form className="ShopForm" onSubmit={handleSubmit}>
       <section className="ShopForm-section">
-        <h3>المعلومات الأساسية</h3>
-        <p className="section-hint">اسم المحل وعلامة مميزة قريبة منه</p>
+        <h3>{SHOP_FORM_TEXT.SECTION_BASIC}</h3>
+        <p className="section-hint">{SHOP_FORM_TEXT.SECTION_BASIC_HINT}</p>
         <div className="ShopForm-grid ShopForm-grid--2col">
-          <div className="ShopField">
-            <label>{TEXT.ADMIN.NAME}</label>
-            <input
-              value={shop.Name}
-              onChange={(e) => set('Name', e.target.value)}
-              placeholder="مثلاً: سوبر ماركت النور"
-              required
-            />
-          </div>
-          <div className="ShopField">
-            <label>{TEXT.CARD.LANDMARK}</label>
-            <input
-              value={shop.LandMark}
-              onChange={(e) => set('LandMark', e.target.value)}
-              placeholder="بجوار مسجد، أمام المول..."
-            />
-          </div>
+          <Input
+            label={TEXT.ADMIN.NAME}
+            value={shop.Name}
+            onChange={(e) => set('Name', e.target.value)}
+            placeholder={SHOP_FORM_TEXT.NAME_PLACEHOLDER}
+            required
+          />
+          <Input
+            label={TEXT.CARD.LANDMARK}
+            value={shop.LandMark}
+            onChange={(e) => set('LandMark', e.target.value)}
+            placeholder={SHOP_FORM_TEXT.LANDMARK_PLACEHOLDER}
+          />
         </div>
       </section>
 
       <section className="ShopForm-section">
-        <h3>التقييم</h3>
-        <p className="section-hint">من 1 إلى 5 نجوم</p>
+        <h3>{SHOP_FORM_TEXT.SECTION_RATE}</h3>
+        <p className="section-hint">{SHOP_FORM_TEXT.SECTION_RATE_HINT}</p>
         <StarRate value={shop.rate} onChange={(v) => set('rate', v)} />
       </section>
 
       <section className="ShopForm-section">
         <h3>{TEXT.FILTERS.CATEGORY}</h3>
-        <p className="section-hint">اختر تصنيف واحد أو أكثر</p>
+        <p className="section-hint">{SHOP_FORM_TEXT.SECTION_CATEGORY_HINT}</p>
         <Chips
           options={options.categories || []}
           value={shop.category}
@@ -229,76 +215,64 @@ export default function ShopForm({
       </section>
 
       <section className="ShopForm-section">
-        <h3>الموقع الجغرافي</h3>
-        <p className="section-hint">المحافظة ثم المنطقة ثم الحي</p>
+        <h3>{SHOP_FORM_TEXT.SECTION_LOCATION}</h3>
+        <p className="section-hint">{SHOP_FORM_TEXT.SECTION_LOCATION_HINT}</p>
         <div className="ShopForm-grid">
-          <div className="ShopField">
-            <label>{TEXT.FILTERS.CONSERVATIVE}</label>
-            <select
-              value={shop.AddressDetiles.Conservative}
-              onChange={(e) => {
-                setAddr('Conservative', e.target.value);
-                setAddr('Area', '');
-                setAddr('Hay', '');
-              }}
-            >
-              <option value="">{TEXT.FILTERS.SELECT}</option>
-              {conservativeOptions.map((c) => (
-                <option key={c.key} value={c.label}>{c.label}</option>
-              ))}
-            </select>
-          </div>
-          <div className="ShopField">
-            <label>{TEXT.FILTERS.AREA}</label>
-            <select
-              value={shop.AddressDetiles.Area}
-              onChange={(e) => {
-                setAddr('Area', e.target.value);
-                setAddr('Hay', '');
-              }}
-              disabled={!shop.AddressDetiles.Conservative}
-            >
-              <option value="">{TEXT.FILTERS.SELECT}</option>
-              {areaOptions.map((a) => (
-                <option key={a.key} value={a.label}>{a.label}</option>
-              ))}
-            </select>
-          </div>
-          <div className="ShopField">
-            <label>{TEXT.FILTERS.HAY}</label>
-            <select
-              value={shop.AddressDetiles.Hay}
-              onChange={(e) => setAddr('Hay', e.target.value)}
-              disabled={!shop.AddressDetiles.Area}
-            >
-              <option value="">{TEXT.FILTERS.SELECT}</option>
-              {hayOptions.map((h) => (
-                <option key={h.key} value={h.label}>{h.label}</option>
-              ))}
-            </select>
-          </div>
+          <Input
+            type="select"
+            label={TEXT.FILTERS.CONSERVATIVE}
+            value={shop.AddressDetiles.Conservative}
+            onChange={(e) => {
+              setAddr('Conservative', e.target.value);
+              setAddr('Area', '');
+              setAddr('Hay', '');
+            }}
+            selectPlaceholder={TEXT.FILTERS.SELECT}
+            options={buildSelectOptions(conservativeOptions)}
+          />
+          <Input
+            type="select"
+            label={TEXT.FILTERS.AREA}
+            value={shop.AddressDetiles.Area}
+            onChange={(e) => {
+              setAddr('Area', e.target.value);
+              setAddr('Hay', '');
+            }}
+            disabled={!shop.AddressDetiles.Conservative}
+            selectPlaceholder={TEXT.FILTERS.SELECT}
+            options={buildSelectOptions(areaOptions)}
+          />
+          <Input
+            type="select"
+            label={TEXT.FILTERS.HAY}
+            value={shop.AddressDetiles.Hay}
+            onChange={(e) => setAddr('Hay', e.target.value)}
+            disabled={!shop.AddressDetiles.Area}
+            selectPlaceholder={TEXT.FILTERS.SELECT}
+            options={buildSelectOptions(hayOptions)}
+          />
         </div>
       </section>
 
       <section className="ShopForm-section">
-        <h3>العناوين التفصيلية</h3>
-        <p className="section-hint">يمكنك إضافة أكثر من عنوان (فرع، شارع...)</p>
+        <h3>{SHOP_FORM_TEXT.SECTION_ADDRESSES}</h3>
+        <p className="section-hint">{SHOP_FORM_TEXT.SECTION_ADDRESSES_HINT}</p>
         <ListInputs
           items={shop.Address}
           onChange={(v) => set('Address', v)}
-          placeholder="عنوان"
-          addLabel="إضافة عنوان"
+          placeholder={SHOP_FORM_TEXT.ADDRESS_PLACEHOLDER}
+          addLabel={SHOP_FORM_TEXT.ADD_ADDRESS_LABEL}
         />
       </section>
 
       <section className="ShopForm-section">
-        <h3>روابط الموقع</h3>
-        <p className="section-hint">روابط Google Maps أو OpenStreetMap</p>
+        <h3>{SHOP_FORM_TEXT.SECTION_LINKS}</h3>
+        <p className="section-hint">{SHOP_FORM_TEXT.SECTION_LINKS_HINT}</p>
         <ListInputs
           items={shop.location}
           onChange={(v) => set('location', v)}
-          placeholder="رابط"
-          addLabel="إضافة رابط"
+          placeholder={SHOP_FORM_TEXT.LINK_PLACEHOLDER}
+          addLabel={SHOP_FORM_TEXT.ADD_LINK_LABEL}
           type="url"
         />
       </section>
@@ -306,23 +280,13 @@ export default function ShopForm({
       <div className="ShopForm-footer">
         {msg && <span className={`msg ${msg.type}`}>{msg.text}</span>}
         {onCancel && (
-          <button
-            type="button"
-            className="ShopBtn ShopBtn--ghost"
-            onClick={onCancel}
-            disabled={submitting}
-          >
+          <Button variant="ghost" disabled={submitting} onClick={onCancel}>
             {TEXT.COMMON.CANCEL}
-          </button>
+          </Button>
         )}
-        <button
-          type="submit"
-          className="ShopBtn ShopBtn--primary"
-          disabled={submitting}
-        >
-          {submitting && <span className="spinner" />}
+        <Button type="submit" variant="primary" loading={submitting}>
           {submitting ? submittingLabel : submitLabel}
-        </button>
+        </Button>
       </div>
     </form>
   );

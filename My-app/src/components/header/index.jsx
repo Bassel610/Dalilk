@@ -1,13 +1,13 @@
 import { Link, useLocation } from 'react-router-dom';
 import Logo from '../../assast/Images/Logo.png';
-import NavButton from '../nav-button';
+import Button from '../button';
 import SearchInput from '../search-input';
 import ProfileChip from '../profile-chip';
-import CategoryIcon from './category-icons';
-import { useAuth } from '../../hooks/use-auth';
-import { ROUTES } from '../../constants/routes';
-import { TEXT } from '../../constants/ui-text';
-import { HEADER_CATEGORIES, HEADER_CATEGORIES_MOBILE } from '../../constants/categories';
+import { CategoryIcon } from '../icons';
+import { useAuth } from '../../hooks/auth/use-auth';
+import { ROUTES } from '../../constants/app/routes';
+import { TEXT } from '../../constants/app/ui-text';
+import { HEADER_CATEGORIES, HEADER_CATEGORIES_MOBILE } from '../../constants/components/header/categories';
 import './styles.css';
 
 function categoryLink(key) {
@@ -35,12 +35,12 @@ export default function Header({ inputvalue, onchangefun, searchBTN, id }) {
             <ProfileChip />
           ) : (
             <>
-              <NavButton variant="outline" to={ROUTES.LOGIN}>
+              <Button variant="outline" size="sm" to={ROUTES.LOGIN}>
                 {TEXT.NAV.LOGIN}
-              </NavButton>
-              <NavButton variant="solid" to={ROUTES.REGISTER}>
+              </Button>
+              <Button variant="solid" size="sm" to={ROUTES.REGISTER}>
                 {TEXT.NAV.REGISTER}
-              </NavButton>
+              </Button>
             </>
           )}
         </div>

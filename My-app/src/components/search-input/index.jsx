@@ -1,4 +1,6 @@
-import { TEXT } from '../../constants/ui-text';
+import Input from '../input';
+import Button from '../button';
+import { TEXT } from '../../constants/app/ui-text';
 import './styles.css';
 
 export default function SearchInput({
@@ -17,16 +19,16 @@ export default function SearchInput({
   };
   return (
     <div className={`SearchInput ${className}`.trim()}>
-      <input
+      <Input
         id={id}
         value={value}
         onChange={onChange}
         onKeyDown={handleKeyDown}
         placeholder={placeholder}
       />
-      <button type="button" className="SearchInput-btn" onClick={onSubmit}>
+      <Button variant="primary" className="SearchInput-btn" onClick={onSubmit}>
         {TEXT.NAV.SEARCH}
-      </button>
+      </Button>
     </div>
   );
 }

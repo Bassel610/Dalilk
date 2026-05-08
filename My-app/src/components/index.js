@@ -1,5 +1,8 @@
 export { default as Header } from './header';
-export { default as NavButton } from './nav-button';
+export { default as Footer } from './footer';
+export { default as Button } from './button';
+export { default as Input } from './input';
+export { default as FormSection } from './form-section';
 export { default as SearchInput } from './search-input';
 export { default as Filter } from './filter';
 export { default as Card, CardsList } from './card';
@@ -7,6 +10,7 @@ export { default as ProtectedRoute } from './protected-route';
 export { default as ProfileChip } from './profile-chip';
 export { default as ShopForm } from './shop-form';
 export { default as EmptyState } from './empty-state';
+export { default as PasswordStrength } from './password-strength';
 export * from './skeleton';
 export { useToast, ToastProvider } from './toast';
 export { useConfirm, ConfirmProvider } from './confirm-dialog';

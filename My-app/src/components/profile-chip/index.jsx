@@ -1,42 +1,13 @@
 import { useEffect, useRef, useState } from 'react';
-import { useNavigate, Link } from 'react-router-dom';
-import { useAuth } from '../../hooks/use-auth';
-import { useProfile } from '../../hooks/use-profile';
-import { ROUTES } from '../../constants/routes';
-import { TEXT } from '../../constants/ui-text';
+import { useNavigate } from 'react-router-dom';
+import Button from '../button';
+import { useAuth } from '../../hooks/auth/use-auth';
+import { useProfile } from '../../hooks/profile/use-profile';
+import { ROUTES } from '../../constants/app/routes';
+import { TEXT } from '../../constants/app/ui-text';
+import { getInitial } from '../../lib/components/profile-chip';
+import { IconUser, IconLogout, IconCaret } from '../icons';
 import './styles.css';
-
-function IconUser() {
-  return (
-    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-      <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2" />
-      <circle cx="12" cy="7" r="4" />
-    </svg>
-  );
-}
-
-function IconLogout() {
-  return (
-    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-      <path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4" />
-      <polyline points="16 17 21 12 16 7" />
-      <line x1="21" y1="12" x2="9" y2="12" />
-    </svg>
-  );
-}
-
-function IconCaret() {
-  return (
-    <svg className="ProfileChip-caret" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.4" strokeLinecap="round" strokeLinejoin="round">
-      <polyline points="6 9 12 15 18 9" />
-    </svg>
-  );
-}
-
-function getInitial(name, email) {
-  const src = (name || email || '?').trim();
-  return src.charAt(0).toUpperCase();
-}
 
 export default function ProfileChip() {
   const { user, logout } = useAuth();
@@ -75,17 +46,19 @@ export default function ProfileChip() {
 
   return (
     <div className="ProfileChip" ref={ref}>
-      <button
-        type="button"
+      <Button
+        variant="ghost"
         className={`ProfileChip-trigger ${open ? 'is-open' : ''}`.trim()}
         onClick={() => setOpen((s) => !s)}
         aria-haspopup="menu"
         aria-expanded={open}
+        endIcon={<IconCaret />}
+        startIcon={
+          <span className="ProfileChip-avatar" aria-hidden="true">{initial}</span>
+        }
       >
-        <span className="ProfileChip-avatar" aria-hidden="true">{initial}</span>
         <span className="ProfileChip-name">{display}</span>
-        <IconCaret />
-      </button>
+      </Button>
 
       {open && (
         <div className="ProfileChip-menu" role="menu">
@@ -93,25 +66,26 @@ export default function ProfileChip() {
             <div className="name">{name || display}</div>
             <div className="email">{user.email}</div>
           </div>
-          <Link
+          <Button
+            variant="ghost"
             to={ROUTES.PROFILE}
             className="ProfileChip-item"
             role="menuitem"
             onClick={() => setOpen(false)}
+            startIcon={<IconUser />}
           >
-            <IconUser />
-            <span>{TEXT.PROFILE.MENU_PROFILE}</span>
-          </Link>
+            {TEXT.PROFILE.MENU_PROFILE}
+          </Button>
           <div className="ProfileChip-divider" />
-          <button
-            type="button"
+          <Button
+            variant="ghost"
             className="ProfileChip-item ProfileChip-item--danger"
             role="menuitem"
             onClick={handleLogout}
+            startIcon={<IconLogout />}
           >
-            <IconLogout />
-            <span>{TEXT.PROFILE.MENU_LOGOUT}</span>
-          </button>
+            {TEXT.PROFILE.MENU_LOGOUT}
+          </Button>
         </div>
       )}
     </div>

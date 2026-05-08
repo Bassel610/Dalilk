@@ -1,30 +1,9 @@
-import { TEXT } from '../../constants/ui-text';
+import Button from '../button';
+import { IconClose } from '../icons';
+import { TEXT } from '../../constants/app/ui-text';
+import { FILTER_CHIP_LABEL, FILTER_CHIPS_TEXT } from '../../constants/components/filter-chips';
+import { findFilterLabel } from '../../lib/components/filter-chips';
 import './styles.css';
-
-const KEY_LABEL = {
-  conservative: TEXT.FILTERS.CONSERVATIVE,
-  area: TEXT.FILTERS.AREA,
-  hay: TEXT.FILTERS.HAY,
-  category: TEXT.FILTERS.CATEGORY,
-  rate: TEXT.FILTERS.RATE,
-};
-
-function findLabel(options, kind, key) {
-  if (kind === 'rate') return key;
-  if (kind === 'conservative') return options.conservatives?.find((o) => o.key === key)?.label || key;
-  if (kind === 'area') return options.areas?.find((o) => o.key === key)?.label || key;
-  if (kind === 'hay') return options.hays?.find((o) => o.key === key)?.label || key;
-  if (kind === 'category') return options.categories?.find((o) => o.key === key)?.label || key;
-  return key;
-}
-
-function IconX() {
-  return (
-    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round">
-      <line x1="18" y1="6" x2="6" y2="18" /><line x1="6" y1="6" x2="18" y2="18" />
-    </svg>
-  );
-}
 
 export default function FilterChips({ filters, options, setFilter, reset }) {
   const active = Object.entries(filters).filter(([, v]) => v);
@@ -32,24 +11,25 @@ export default function FilterChips({ filters, options, setFilter, reset }) {
 
   return (
     <div className="FilterChips">
-      <span className="FilterChips-label">المفعّل:</span>
+      <span className="FilterChips-label">{FILTER_CHIPS_TEXT.ACTIVE_LABEL}</span>
       {active.map(([k, v]) => (
         <span key={k} className="FilterChip">
-          <span className="FilterChip-key">{KEY_LABEL[k]}:</span>
-          <span>{findLabel(options, k, v)}</span>
-          <button
-            type="button"
+          <span className="FilterChip-key">{FILTER_CHIP_LABEL[k]}:</span>
+          <span>{findFilterLabel(options, k, v)}</span>
+          <Button
+            variant="ghost"
+            size="sm"
             className="FilterChip-x"
             onClick={() => setFilter(k, '')}
-            aria-label={`Remove ${KEY_LABEL[k]} filter`}
+            aria-label={`Remove ${FILTER_CHIP_LABEL[k]} filter`}
           >
-            <IconX />
-          </button>
+            <IconClose strokeWidth={3} />
+          </Button>
         </span>
       ))}
-      <button type="button" className="FilterChip--clear" onClick={reset}>
+      <Button variant="ghost" size="sm" className="FilterChip--clear" onClick={reset}>
         {TEXT.FILTERS.RESET}
-      </button>
+      </Button>
     </div>
   );
 }

@@ -1,7 +1,7 @@
 import { Navigate } from 'react-router-dom';
-import { useAuth } from '../../hooks/use-auth';
-import { ROUTES } from '../../constants/routes';
-import { TEXT } from '../../constants/ui-text';
+import { useAuth } from '../hooks/auth/use-auth';
+import { ROUTES } from '../constants/app/routes';
+import { TEXT } from '../constants/app/ui-text';
 
 export default function ProtectedRoute({ children, requireRole }) {
   const { user, role, loading } = useAuth();

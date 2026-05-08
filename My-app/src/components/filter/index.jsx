@@ -1,22 +1,21 @@
-import { TEXT } from '../../constants/ui-text';
+import Input from '../input';
+import Button from '../button';
+import { TEXT } from '../../constants/app/ui-text';
 import './styles.css';
 
-function Select({ label, value, onChange, options, disabled }) {
+function FilterSelect({ label, value, onChange, options, disabled }) {
+  const opts = (options || []).map((o) => ({ value: o.key, label: o.label }));
   return (
     <div className={`SortBox ${disabled ? 'is-disabled' : ''}`.trim()}>
-      <label>{label}</label>
-      <select
+      <Input
+        type="select"
+        label={label}
         value={value}
         onChange={(e) => onChange(e.target.value)}
         disabled={disabled}
-      >
-        <option value="">{TEXT.FILTERS.SELECT}</option>
-        {options.map((opt) => (
-          <option key={opt.key} value={opt.key}>
-            {opt.label}
-          </option>
-        ))}
-      </select>
+        selectPlaceholder={TEXT.FILTERS.SELECT}
+        options={opts}
+      />
     </div>
   );
 }
@@ -31,41 +30,41 @@ export default function Filter({ filters, setFilter, reset, options }) {
   return (
     <section className="SortSection">
       <div className="Contaner">
-        <Select
+        <FilterSelect
           label={TEXT.FILTERS.CONSERVATIVE}
           value={filters.conservative}
           onChange={(v) => setFilter('conservative', v)}
           options={conservatives}
         />
-        <Select
+        <FilterSelect
           label={TEXT.FILTERS.AREA}
           value={filters.area}
           onChange={(v) => setFilter('area', v)}
           options={areas}
           disabled={!filters.conservative}
         />
-        <Select
+        <FilterSelect
           label={TEXT.FILTERS.HAY}
           value={filters.hay}
           onChange={(v) => setFilter('hay', v)}
           options={hays}
           disabled={!filters.area}
         />
-        <Select
+        <FilterSelect
           label={TEXT.FILTERS.CATEGORY}
           value={filters.category}
           onChange={(v) => setFilter('category', v)}
           options={categories}
         />
-        <Select
+        <FilterSelect
           label={TEXT.FILTERS.RATE}
           value={filters.rate}
           onChange={(v) => setFilter('rate', v)}
           options={rates}
         />
-        <button type="button" className="RemoveAllSort" onClick={reset}>
+        <Button variant="ghost" className="RemoveAllSort" onClick={reset}>
           {TEXT.FILTERS.RESET}
-        </button>
+        </Button>
       </div>
     </section>
   );
