@@ -1,0 +1,15 @@
+export const FOOTER_TEXT = {
+  TAGLINE: 'دليل المحلات والخدمات الأقرب إليك في مدينتك. ابحث، صفّ النتائج، واصل لأي مكان بسهولة.',
+  COL_NAV: 'التصفح',
+  COL_CATS: 'التصنيفات',
+  COL_LEGAL: 'قانوني',
+  NAV_HOME: 'الرئيسية',
+  NAV_ALL_SHOPS: 'كل المحلات',
+  NAV_LOGIN: 'تسجيل الدخول',
+  NAV_REGISTER: 'إنشاء حساب',
+  LEGAL_PRIVACY: 'سياسة الخصوصية',
+  LEGAL_TERMS: 'شروط الاستخدام',
+  LEGAL_CONTACT: 'تواصل معنا',
+  COPYRIGHT: (year) => `© ${year} دليلك. جميع الحقوق محفوظة.`,
+  MADE_IN: 'صُنع بحب في مصر',
+};

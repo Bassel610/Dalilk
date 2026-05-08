@@ -1,4 +1,4 @@
-import { TEXT } from './ui-text';
+import { TEXT } from '../../app/ui-text';
 
 export const HEADER_CATEGORIES = [
   { key: 'all', label: TEXT.CATEGORIES.ALL, icon: 'all' },
