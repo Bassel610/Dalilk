@@ -2,6 +2,7 @@ import { useState } from 'react';
 import Card from './card';
 import ShopDetail from './shop-detail';
 import { TEXT } from '../../constants/app/ui-text';
+import './styles.css';
 
 export default function CardsList({ shops, emptyText }) {
   const [active, setActive] = useState(null);

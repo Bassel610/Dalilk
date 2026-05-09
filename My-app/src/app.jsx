@@ -2,8 +2,8 @@ import { useState, lazy, Suspense } from 'react';
 import { Route, Routes, useNavigate, useLocation } from 'react-router-dom';
 import './App.css';
 import { ROUTES } from './constants/app/routes';
-import { TEXT } from './constants/app/ui-text';
 import ProtectedRoute from './components/protected-route';
+import PageLoader from './components/page-loader';
 
 const HomePage = lazy(() => import('./pages/home'));
 const DetailsPage = lazy(() => import('./pages/details'));
@@ -12,14 +12,6 @@ const RegisterPage = lazy(() => import('./pages/register'));
 const AdminLoginPage = lazy(() => import('./pages/admin-login'));
 const DashboardPage = lazy(() => import('./pages/dashboard'));
 const ProfilePage = lazy(() => import('./pages/profile'));
-
-function Loading() {
-  return (
-    <div style={{ padding: 40, textAlign: 'center', color: '#888' }}>
-      {TEXT.COMMON.LOADING}
-    </div>
-  );
-}
 
 function PageFrame({ children }) {
   const location = useLocation();
@@ -53,7 +45,7 @@ export default function App() {
 
   return (
     <div className="App">
-      <Suspense fallback={<Loading />}>
+      <Suspense fallback={<PageLoader />}>
         <PageFrame>
           <Routes>
             <Route path={ROUTES.HOME} element={<HomePage {...sharedSearchProps} />} />

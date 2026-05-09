@@ -165,6 +165,7 @@
 }
 .ShopDetail-header {
   padding: 24px 26px 18px;
+  padding-inline-end: 56px;
   background: linear-gradient(160deg, #648b7f 0%, #244c3f 100%);
   color: #fff;
   position: sticky;
@@ -174,7 +175,7 @@
 .ShopDetail-close {
   position: absolute;
   top: 16px;
-  inset-inline-start: 16px;
+  inset-inline-end: 16px;
   width: 30px;
   height: 30px;
   border: none;

@@ -1,9 +1,9 @@
 import WebsiteLayout from '../../layouts/website';
 import ProfileSummary from './summary';
 import ProfileForm from './form';
+import PageLoader from '../page-loader';
 import { useAuth } from '../../hooks/auth/use-auth';
 import { useProfileForm } from '../../hooks/profile/use-profile-form';
-import { TEXT } from '../../constants/app/ui-text';
 import './page.css';
 
 export default function Profile() {
@@ -14,9 +14,7 @@ export default function Profile() {
   if (loading) {
     return (
       <WebsiteLayout>
-        <div className="ProfilePage">
-          <div className="ProfilePage-loading">{TEXT.COMMON.LOADING}</div>
-        </div>
+        <PageLoader size="md" />
       </WebsiteLayout>
     );
   }

@@ -3,6 +3,7 @@ import { signInWithEmailAndPassword } from 'firebase/auth';
 import { useNavigate } from 'react-router-dom';
 import { auth } from '../../firebase';
 import { authService } from '../../services/auth-service';
+import { localAuth, isAuthOfflineError } from '../../services/local-auth';
 import { ROUTES } from '../../constants/app/routes';
 import { DEMO_EMAIL } from '../../constants/pages/admin-login';
 
@@ -18,13 +19,24 @@ export function useAdminLogin() {
     setErr('');
     setLoading(true);
     try {
-      await signInWithEmailAndPassword(auth, email, password);
-      if (email !== DEMO_EMAIL) {
-        const data = await authService.me();
-        if (data.role !== 'admin') {
-          await auth.signOut();
-          throw new Error('Not an admin account');
+      try {
+        await signInWithEmailAndPassword(auth, email, password);
+        if (email !== DEMO_EMAIL) {
+          const data = await authService.me();
+          if (data.role !== 'admin') {
+            await auth.signOut();
+            throw new Error('Not an admin account');
+          }
         }
+        navigate(ROUTES.DASHBOARD);
+        return;
+      } catch (firebaseErr) {
+        if (!isAuthOfflineError(firebaseErr)) throw firebaseErr;
+      }
+      const session = localAuth.login({ email, password });
+      if (session.role !== 'admin') {
+        localAuth.signOut();
+        throw new Error('Not an admin account');
       }
       navigate(ROUTES.DASHBOARD);
     } catch (e) {

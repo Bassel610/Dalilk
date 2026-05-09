@@ -3,7 +3,9 @@ import { signInWithEmailAndPassword, signInWithPopup } from 'firebase/auth';
 import { useNavigate } from 'react-router-dom';
 import { auth, googleProvider } from '../../firebase';
 import { authService } from '../../services/auth-service';
+import { localAuth, isAuthOfflineError } from '../../services/local-auth';
 import { ROUTES } from '../../constants/app/routes';
+import { DEMO_EMAIL } from '../../constants/pages/admin-login';
 
 export function useLogin() {
   const [email, setEmail] = useState('');
@@ -13,10 +15,14 @@ export function useLogin() {
   const [googleLoading, setGoogleLoading] = useState(false);
   const navigate = useNavigate();
 
-  const routeAfterLogin = async () => {
+  const routeAfterFirebaseLogin = async () => {
+    if (auth.currentUser?.email === DEMO_EMAIL) {
+      navigate(ROUTES.DASHBOARD);
+      return;
+    }
     try {
       const me = await authService.me();
-      navigate(me.role === 'admin' ? ROUTES.DASHBOARD : ROUTES.HOME);
+      navigate(me?.role === 'admin' ? ROUTES.DASHBOARD : ROUTES.HOME);
     } catch {
       navigate(ROUTES.HOME);
     }
@@ -27,8 +33,15 @@ export function useLogin() {
     setErr('');
     setLoading(true);
     try {
-      await signInWithEmailAndPassword(auth, email, password);
-      await routeAfterLogin();
+      try {
+        await signInWithEmailAndPassword(auth, email, password);
+        await routeAfterFirebaseLogin();
+        return;
+      } catch (firebaseErr) {
+        if (!isAuthOfflineError(firebaseErr)) throw firebaseErr;
+      }
+      const session = localAuth.login({ email, password });
+      navigate(session.role === 'admin' ? ROUTES.DASHBOARD : ROUTES.HOME);
     } catch (e) {
       setErr(e.message);
     } finally {
@@ -41,9 +54,13 @@ export function useLogin() {
     setGoogleLoading(true);
     try {
       await signInWithPopup(auth, googleProvider);
-      await routeAfterLogin();
+      await routeAfterFirebaseLogin();
     } catch (e) {
-      setErr(e.message);
+      setErr(
+        isAuthOfflineError(e)
+          ? 'تعذّر الاتصال بـ Google. حاول لاحقاً أو سجّل الدخول بالبريد.'
+          : e.message,
+      );
     } finally {
       setGoogleLoading(false);
     }

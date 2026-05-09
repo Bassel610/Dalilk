@@ -1,0 +1,169 @@
+.PageLoader {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 36px;
+  padding: 80px 24px;
+  width: 100%;
+  flex: 1;
+  direction: rtl;
+  isolation: isolate;
+}
+.PageLoader--lg { min-height: 60vh; }
+.PageLoader--md { min-height: 280px; padding: 56px 24px; gap: 28px; }
+.PageLoader--sm { min-height: 160px; padding: 32px 20px; gap: 18px; }
+
+.PageLoader-glow {
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  background:
+    radial-gradient(60% 50% at 50% 42%, rgba(100, 139, 127, 0.12), transparent 65%),
+    radial-gradient(22% 16% at 50% 42%, rgba(245, 184, 66, 0.08), transparent 70%);
+  pointer-events: none;
+}
+
+.PageLoader-stage {
+  position: relative;
+  width: 160px;
+  height: 160px;
+  display: grid;
+  place-items: center;
+}
+.PageLoader--md .PageLoader-stage { width: 110px; height: 110px; }
+.PageLoader--sm .PageLoader-stage { width: 72px; height: 72px; }
+
+/* Sonar rings — emerge from the base of the pin */
+.PageLoader-ring {
+  position: absolute;
+  left: 50%;
+  bottom: 18%;
+  width: 28px;
+  height: 14px;
+  margin-left: -14px;
+  border: 1.5px solid var(--main-color);
+  border-radius: 50%;
+  opacity: 0;
+  animation: pageLoaderRing 2.4s cubic-bezier(0.22, 1, 0.36, 1) infinite;
+  pointer-events: none;
+}
+.PageLoader-ring--1 { animation-delay: 0s; }
+.PageLoader-ring--2 { animation-delay: 0.6s; }
+.PageLoader-ring--3 { animation-delay: 1.2s; }
+.PageLoader--sm .PageLoader-ring { width: 18px; height: 9px; margin-left: -9px; border-width: 1.2px; }
+
+@keyframes pageLoaderRing {
+  0% {
+    transform: scale(0.6);
+    opacity: 0;
+    border-color: var(--bold-color);
+  }
+  18% { opacity: 0.85; }
+  100% {
+    transform: scale(5.5);
+    opacity: 0;
+    border-color: var(--main-color);
+  }
+}
+
+/* Ground shadow that scales with pin altitude */
+.PageLoader-shadow {
+  position: absolute;
+  left: 50%;
+  bottom: 16%;
+  width: 38px;
+  height: 6px;
+  margin-left: -19px;
+  background: radial-gradient(ellipse, rgba(36, 76, 63, 0.32), transparent 70%);
+  border-radius: 50%;
+  filter: blur(1.5px);
+  animation: pageLoaderShadow 1.4s cubic-bezier(0.5, 0, 0.5, 1) infinite;
+}
+.PageLoader--sm .PageLoader-shadow { width: 22px; margin-left: -11px; height: 4px; }
+
+@keyframes pageLoaderShadow {
+  0%, 100% { transform: scale(1); opacity: 0.85; }
+  50% { transform: scale(0.5); opacity: 0.4; }
+}
+
+/* The pin itself — bouncing up and down with a slight drift */
+.PageLoader-pin {
+  position: relative;
+  width: 50px;
+  height: auto;
+  filter: drop-shadow(0 12px 22px rgba(36, 76, 63, 0.28));
+  animation: pageLoaderBounce 1.4s cubic-bezier(0.5, 0, 0.5, 1) infinite;
+  z-index: 1;
+}
+.PageLoader--md .PageLoader-pin { width: 36px; }
+.PageLoader--sm .PageLoader-pin { width: 24px; }
+
+@keyframes pageLoaderBounce {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-16px); }
+}
+
+/* Status text */
+.PageLoader-text {
+  display: inline-flex;
+  align-items: center;
+  gap: 14px;
+  font-family: var(--font-display);
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--text-3);
+  letter-spacing: 0.5px;
+}
+.PageLoader-label {
+  position: relative;
+}
+.PageLoader-label::after {
+  content: '';
+  position: absolute;
+  inset-inline-start: 0;
+  inset-inline-end: 0;
+  bottom: -6px;
+  height: 2px;
+  background: linear-gradient(90deg, transparent, var(--border-strong), transparent);
+  border-radius: 2px;
+  opacity: 0.55;
+}
+.PageLoader--sm .PageLoader-text { font-size: 12px; gap: 10px; }
+.PageLoader--sm .PageLoader-label::after { display: none; }
+
+.PageLoader-bouncer {
+  display: inline-flex;
+  gap: 5px;
+  align-items: flex-end;
+  height: 12px;
+}
+.PageLoader-bouncer span {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--bold-color);
+  opacity: 0.32;
+  animation: pageLoaderDot 1.2s cubic-bezier(0.5, 0, 0.5, 1) infinite;
+}
+.PageLoader-bouncer span:nth-child(1) { animation-delay: 0s; }
+.PageLoader-bouncer span:nth-child(2) { animation-delay: 0.18s; }
+.PageLoader-bouncer span:nth-child(3) {
+  animation-delay: 0.36s;
+  background: var(--warning);
+}
+
+@keyframes pageLoaderDot {
+  0%, 60%, 100% { opacity: 0.32; transform: translateY(0) scale(1); }
+  30% { opacity: 1; transform: translateY(-7px) scale(1.18); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .PageLoader-pin,
+  .PageLoader-shadow,
+  .PageLoader-ring,
+  .PageLoader-bouncer span {
+    animation-duration: 3s;
+  }
+}

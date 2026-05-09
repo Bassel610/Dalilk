@@ -2,10 +2,10 @@ import { useState, useMemo } from 'react';
 import ShopForm from '../../shop-form';
 import Input from '../../input';
 import Button from '../../button';
+import PageLoader from '../../page-loader';
 import { useShopsList } from '../../../hooks/shops/use-shops-list';
 import { useUpdateShop } from '../../../hooks/shops/use-update-shop';
 import { useDebounce } from '../../../hooks/use-debounce';
-import { TEXT } from '../../../constants/app/ui-text';
 import { EDIT_SHOP_TEXT } from '../../../constants/pages/dashboard';
 import './styles.css';
 
@@ -42,7 +42,7 @@ export default function EditShop() {
       </div>
 
       {loading ? (
-        <div className="EditShop-status">{TEXT.COMMON.LOADING}</div>
+        <PageLoader size="sm" />
       ) : !selected && search && matches.length === 0 ? (
         <div className="EditShop-status">{EDIT_SHOP_TEXT.NO_MATCH}</div>
       ) : !selected && matches.length > 0 ? (

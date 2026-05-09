@@ -1,18 +1,39 @@
 .Skeleton {
   display: inline-block;
+  position: relative;
+  overflow: hidden;
+  background: var(--surface-2);
+  isolation: isolate;
+}
+.Skeleton::after {
+  content: '';
+  position: absolute;
+  inset: 0;
   background: linear-gradient(
-    90deg,
-    #eaf2ee 0%,
-    #d9eae2 50%,
-    #eaf2ee 100%
+    110deg,
+    transparent 20%,
+    rgba(255, 255, 255, 0.7) 45%,
+    rgba(255, 255, 255, 0.95) 50%,
+    rgba(255, 255, 255, 0.7) 55%,
+    transparent 80%
   );
-  background-size: 200% 100%;
-  animation: skeletonShimmer 1.4s ease-in-out infinite;
+  transform: translateX(-100%);
+  animation: skeletonShimmer 1.6s cubic-bezier(0.4, 0, 0.2, 1) infinite;
 }
 
 @keyframes skeletonShimmer {
-  0%   { background-position: 200% 0; }
-  100% { background-position: -200% 0; }
+  0%   { transform: translateX(-100%); }
+  100% { transform: translateX(100%); }
+}
+
+[dir='rtl'] .Skeleton::after,
+.CardSkeleton .Skeleton::after,
+.RowSkeleton .Skeleton::after {
+  animation-name: skeletonShimmerRtl;
+}
+@keyframes skeletonShimmerRtl {
+  0%   { transform: translateX(100%); }
+  100% { transform: translateX(-100%); }
 }
 
 .SkeletonText {

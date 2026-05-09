@@ -4,7 +4,7 @@ import { pickDefined, applyShopFilters } from '../lib/services/shops';
 import { createCollectionStore, genId } from '../lib/local-store';
 import { SEED_SHOPS } from '../data/shops';
 
-const localShops = createCollectionStore('dalilk_shops', SEED_SHOPS);
+const localShops = createCollectionStore('dalilk_shops_v3', SEED_SHOPS);
 
 function isOffline(err) {
   return err?.isBackendOffline === true;
@@ -12,29 +12,38 @@ function isOffline(err) {
 
 export const shopsService = {
   list: async (filters) => {
-    try {
-      return await apiClient.get(ENDPOINTS.SHOPS.LIST, { params: pickDefined(filters) });
-    } catch (e) {
-      if (!isOffline(e)) throw e;
+    const seed = () => {
       const items = applyShopFilters(localShops.list(), filters);
       return { items, total: items.length };
+    };
+    try {
+      const res = await apiClient.get(ENDPOINTS.SHOPS.LIST, { params: pickDefined(filters) });
+      const items = Array.isArray(res) ? res : res?.items;
+      if (!Array.isArray(items) || items.length === 0) return seed();
+      return res;
+    } catch {
+      return seed();
     }
   },
   detail: async (id) => {
     try {
-      return await apiClient.get(ENDPOINTS.SHOPS.DETAIL(id));
-    } catch (e) {
-      if (!isOffline(e)) throw e;
+      const res = await apiClient.get(ENDPOINTS.SHOPS.DETAIL(id));
+      return res || localShops.get(id);
+    } catch {
       return localShops.get(id);
     }
   },
   filterOptions: async () => {
-    try {
-      return await apiClient.get(ENDPOINTS.SHOPS.FILTER_OPTIONS);
-    } catch (e) {
-      if (!isOffline(e)) throw e;
+    const seed = async () => {
       const { SEED_FILTER_OPTIONS } = await import('../data/filter-options');
       return SEED_FILTER_OPTIONS;
+    };
+    try {
+      const res = await apiClient.get(ENDPOINTS.SHOPS.FILTER_OPTIONS);
+      if (!res || (typeof res === 'object' && Object.keys(res).length === 0)) return seed();
+      return res;
+    } catch {
+      return seed();
     }
   },
   create: async (shop) => {

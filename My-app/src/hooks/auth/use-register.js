@@ -3,6 +3,7 @@ import { signInWithEmailAndPassword, signInWithPopup } from 'firebase/auth';
 import { useNavigate } from 'react-router-dom';
 import { auth, googleProvider } from '../../firebase';
 import { authService } from '../../services/auth-service';
+import { localAuth, isAuthOfflineError } from '../../services/local-auth';
 import { ROUTES } from '../../constants/app/routes';
 
 export function useRegister() {
@@ -18,9 +19,16 @@ export function useRegister() {
     setErr('');
     setLoading(true);
     try {
-      await authService.register(email, password);
-      await signInWithEmailAndPassword(auth, email, password);
-      navigate(ROUTES.HOME);
+      try {
+        await authService.register(email, password);
+        await signInWithEmailAndPassword(auth, email, password);
+        navigate(ROUTES.HOME);
+        return;
+      } catch (apiErr) {
+        if (!isAuthOfflineError(apiErr)) throw apiErr;
+      }
+      const session = localAuth.register({ email, password });
+      navigate(session.role === 'admin' ? ROUTES.DASHBOARD : ROUTES.HOME);
     } catch (e) {
       setErr(e.message);
     } finally {
@@ -35,7 +43,11 @@ export function useRegister() {
       await signInWithPopup(auth, googleProvider);
       navigate(ROUTES.HOME);
     } catch (e) {
-      setErr(e.message);
+      setErr(
+        isAuthOfflineError(e)
+          ? 'تعذّر الاتصال بـ Google. سجّل بالبريد بدلاً من ذلك.'
+          : e.message,
+      );
     } finally {
       setGoogleLoading(false);
     }

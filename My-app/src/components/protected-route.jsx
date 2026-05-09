@@ -1,12 +1,12 @@
 import { Navigate } from 'react-router-dom';
 import { useAuth } from '../hooks/auth/use-auth';
 import { ROUTES } from '../constants/app/routes';
-import { TEXT } from '../constants/app/ui-text';
+import PageLoader from './page-loader';
 
 export default function ProtectedRoute({ children, requireRole }) {
   const { user, role, loading } = useAuth();
 
-  if (loading) return <div style={{ padding: 40 }}>{TEXT.COMMON.LOADING}</div>;
+  if (loading) return <PageLoader />;
   if (!user)
     return (
       <Navigate
